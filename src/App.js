@@ -45,10 +45,10 @@ const Card = (props) => {
 const Deck = (props) => {
   const [cards, setCards] = useState([])
 
-  useEffect((async () => {
+  useEffect(async () => {
       let cards = await (await fetch(`http://192.168.1.64:8080/${props.path}`)).json()
         setCards(cards)
-    }))
+    }, [])
 
   return <div>
       { (cards.length === 0) ?
@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="App"> 
       <header className="App-header"> 
-        <Deck title="Table" path="table/" flipped="3" />
+        <Deck title="Table" path="table/" flipped="2" />
         <Deck title="Hand" path="deck/2" />
       </header>
     </div>
