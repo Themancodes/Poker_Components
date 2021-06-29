@@ -8,10 +8,12 @@ const Card = (props) => {
   return <div 
     symbol={props.symbol}
     number={props.number}
-    className={['card', (isFlipped ? 'flipped' : '')].filter(Boolean).join(' ')}
-    onClick={() => { setIsFlipped(!isFlipped) }} 
+    className="card"
     >
-   <div className="container">
+   <div 
+   className={['container', (isFlipped ? 'flipped' : '')].filter(Boolean).join(' ')}
+   onClick={() => { setIsFlipped(!isFlipped) }} 
+   >
      
      <div className="front">
        
