@@ -1,85 +1,132 @@
+h3 {
+    color: teal;
+    position: relative;
+    top: -5px;
+    left: 10px;
+    font-family: 'Bebas Neue';
+    font-weight: 600;
+    font-size: 25px;
+    letter-spacing: 14px;
+    margin: 50px 0 -5px 0;
+}
+
+.App::before {
+    font-size: 18px;
+    color: yellowgreen;
+    letter-spacing: 3px;
+    font-family: 'Bebas Neue';
+    content: 'Rockstar Casino!';
+    box-sizing: border-box;
+    padding: 30px 15px 10px 40px;
+    background-color: white;
+    border-radius: 10px 10px 0 0;
+    border: 1px solid #eee;
+    display: block;
+    width: calc(100% + 2px);
+    position: absolute;
+    top: -10px;
+    left: -1px;
+}
+
+.App {
+    position: relative;
+    top: ;
+    width: 800px;
+    height: 550px;
+    background: linear-gradient(35deg, #fff4 0%, #fffd 100%);
+    background-size: 100%;
+    background-blend-mode: multiply;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 6px 6px 28px 3px #0002, 1px 1px 2px 1px #1234;
+    margin-bottom: 0px;
+    padding: 30px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
 .deck {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card .container:hover {
-    transform: translateY(-3px);
-}
-
-.card.flipped .container:hover {
-    transform: translateY(-3px) rotateY(0.5turn);
+    justify-content: left;
+    margin-bottom: 30px;
 }
 
 .card {
+    .container:hover {
+        transform: translateY(-5px) scale(1.05);
+    }
+    .container:hover>.front:after {
+        transform: translateY(10px);
+    }
+    .container.flipped:hover {
+        transform: translateY(-3px) rotateY(0.5turn);
+    }
+    font-family: 'm plus 1p';
     margin: 5px;
     width: 100px;
     height: calc(100px * 1.4);
+    perspective: 600px;
     display: inline-block;
-    z-index: 2;
     color: #138;
-}
-
-.card .container {
-    transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    background: linear-gradient(35deg, #e7e7e7 0%, white 100%);
-    border: 1px solid #eee;
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
-    box-shadow: 3px 3px 8px 2px #0002, 1px 1px 2px 1px #1234;
-    transform-origin: center center;
-    transform-style: preserve-3d;
-}
-
-.card .front {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-}
-
-.card div.back {
-    top: 0;
-    position: absolute;
-}
-
-.card.flipped .container {
-    transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    transform-origin: center;
-    transform: rotateY(0.5turn);
-    backface-visibility: hidden;
-}
-
-.card.flipped {
-    transition: transform 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    border-radius: 13px;
-    transform-origin: center;
-    transform: rotateY(0.5turn);
-    width: 100px;
-    height: 140px;
-    background-image: url("./images/cards-back.png");
-    background-size: 220px;
-    background-repeat: no-repeat;
-    background-position-y: 5px;
-}
-
-.card div.back,
-.card div.front {}
-
-.card+.card {
-    margin-left: 5px;
-}
-
-.card[symbol="♦"],
-.card[symbol="♥"] {
-    color: #d02;
+    .container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform-style: preserve-3d;
+        .front {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background: linear-gradient(35deg, #ffffff 0%, rgb(233, 255, 248) 100%);
+            // box-shadow: inset 3px 3px 10px 2px #fff, 1px 1px 2px 1px #fffb;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+        .front::after {
+            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+            content: '';
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+            height: 40px;
+            position: absolute;
+            bottom: -45px;
+            background: linear-gradient(0deg, #ffffff00 0%, rgba(233, 255, 248, 0.274) 100%);
+        }
+        .back {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            transform: rotateY(180deg);
+            background-image: url("./images/cards-back.png");
+            background-size: 140px;
+            background-repeat: no-repeat;
+            background-position-x: -20px;
+            // box-shadow: 3px 3px 8px 2px #0002, 1px 1px 2px 1px #1234;
+            cursor: pointer;
+            user-select: none;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+        +.card {
+            margin-left: 5px;
+        }
+        &[symbol="♦"],
+        &[symbol="♥"] {
+            color: #d02;
+        }
+        &.flipped {
+            transform: rotateY(180deg);
+        }
+    }
 }
 
 .card-corner {
@@ -89,225 +136,361 @@
     position: absolute;
     top: 0px;
     left: 0px;
-}
-
-.card-corner div:nth-child(2) {
-    margin-top: -3px;
-    font-size: 80%;
-}
-
-.symbols+.card-corner {
-    top: auto;
-    left: auto;
-    right: 0px;
-    bottom: 0px;
-    transform: rotate(0.5turn);
+    div:nth-child(2) {
+        margin-top: -3px;
+        font-size: 80%;
+    }
 }
 
 .symbols {
+    +.card-corner {
+        top: auto;
+        left: auto;
+        right: 0px;
+        bottom: 0px;
+        transform: rotate(0.5turn);
+    }
     position: relative;
     height: 100%;
+    div {
+        position: absolute;
+        font-size: 24px;
+    }
 }
 
-.symbols div {
-    position: absolute;
-    font-size: 24px;
-}
-
-.card[number="A"] .symbols div:nth-child(1) {
-    font-size: 65px;
-    top: 25px;
-}
-
-.card[number="A"] .symbols div,
-.card[number="2"] .symbols div,
-.card[number="3"] .symbols div,
-.card[number="5"] .symbols div:nth-child(5),
-.card[number="7"] .symbols div:nth-child(7),
-.card[number="8"] .symbols div:nth-child(7),
-.card[number="8"] .symbols div:nth-child(8),
-.card[number="9"] .symbols div:nth-child(9),
-.card[number="10"] .symbols div:nth-child(9),
-.card[number="10"] .symbols div:nth-child(10) {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.card[number="2"] .symbols div:nth-child(1),
-.card[number="3"] .symbols div:nth-child(1) {
-    top: 20px;
-}
-
-.card[number="2"] .symbols div:nth-child(2),
-.card[number="3"] .symbols div:nth-child(3) {
-    bottom: 20px;
-    transform: translateX(-50%) rotate(0.5turn);
-}
-
-.card[number="3"] .symbols div:nth-child(2),
-.card[number="5"] .symbols div:nth-child(5),
-.card[number="9"] .symbols div:nth-child(9) {
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
-
-.card[number="4"] .symbols div:nth-child(1),
-.card[number="4"] .symbols div:nth-child(2),
-.card[number="5"] .symbols div:nth-child(1),
-.card[number="5"] .symbols div:nth-child(2),
-.card[number="6"] .symbols div:nth-child(1),
-.card[number="6"] .symbols div:nth-child(2),
-.card[number="7"] .symbols div:nth-child(1),
-.card[number="7"] .symbols div:nth-child(2),
-.card[number="8"] .symbols div:nth-child(1),
-.card[number="8"] .symbols div:nth-child(2),
-.card[number="9"] .symbols div:nth-child(1),
-.card[number="9"] .symbols div:nth-child(2),
-.card[number="10"] .symbols div:nth-child(1),
-.card[number="10"] .symbols div:nth-child(2) {
-    top: 20px;
-}
-
-.card[number="4"] .symbols div:nth-child(3),
-.card[number="4"] .symbols div:nth-child(4),
-.card[number="5"] .symbols div:nth-child(3),
-.card[number="5"] .symbols div:nth-child(4),
-.card[number="6"] .symbols div:nth-child(3),
-.card[number="6"] .symbols div:nth-child(4),
-.card[number="7"] .symbols div:nth-child(3),
-.card[number="7"] .symbols div:nth-child(4),
-.card[number="8"] .symbols div:nth-child(3),
-.card[number="8"] .symbols div:nth-child(4),
-.card[number="9"] .symbols div:nth-child(3),
-.card[number="9"] .symbols div:nth-child(4),
-.card[number="10"] .symbols div:nth-child(3),
-.card[number="10"] .symbols div:nth-child(4) {
-    bottom: 20px;
-    transform: rotate(0.5turn);
-}
-
-.card[number="4"] .symbols div:nth-child(1),
-.card[number="4"] .symbols div:nth-child(3),
-.card[number="5"] .symbols div:nth-child(1),
-.card[number="5"] .symbols div:nth-child(3),
-.card[number="6"] .symbols div:nth-child(1),
-.card[number="6"] .symbols div:nth-child(3),
-.card[number="6"] .symbols div:nth-child(5),
-.card[number="7"] .symbols div:nth-child(1),
-.card[number="7"] .symbols div:nth-child(3),
-.card[number="7"] .symbols div:nth-child(5),
-.card[number="8"] .symbols div:nth-child(1),
-.card[number="8"] .symbols div:nth-child(3),
-.card[number="8"] .symbols div:nth-child(5),
-.card[number="9"] .symbols div:nth-child(1),
-.card[number="9"] .symbols div:nth-child(3),
-.card[number="9"] .symbols div:nth-child(5),
-.card[number="9"] .symbols div:nth-child(7),
-.card[number="10"] .symbols div:nth-child(1),
-.card[number="10"] .symbols div:nth-child(3),
-.card[number="10"] .symbols div:nth-child(5),
-.card[number="10"] .symbols div:nth-child(7) {
-    left: 20px;
-}
-
-.card[number="4"] .symbols div:nth-child(2),
-.card[number="4"] .symbols div:nth-child(4),
-.card[number="5"] .symbols div:nth-child(2),
-.card[number="5"] .symbols div:nth-child(4),
-.card[number="6"] .symbols div:nth-child(2),
-.card[number="6"] .symbols div:nth-child(4),
-.card[number="6"] .symbols div:nth-child(6),
-.card[number="7"] .symbols div:nth-child(2),
-.card[number="7"] .symbols div:nth-child(4),
-.card[number="7"] .symbols div:nth-child(6),
-.card[number="8"] .symbols div:nth-child(2),
-.card[number="8"] .symbols div:nth-child(4),
-.card[number="8"] .symbols div:nth-child(6),
-.card[number="9"] .symbols div:nth-child(2),
-.card[number="9"] .symbols div:nth-child(4),
-.card[number="9"] .symbols div:nth-child(6),
-.card[number="9"] .symbols div:nth-child(8),
-.card[number="10"] .symbols div:nth-child(2),
-.card[number="10"] .symbols div:nth-child(4),
-.card[number="10"] .symbols div:nth-child(6),
-.card[number="10"] .symbols div:nth-child(8) {
-    right: 20px;
-}
-
-.card[number="6"] .symbols div:nth-child(5),
-.card[number="6"] .symbols div:nth-child(6),
-.card[number="7"] .symbols div:nth-child(5),
-.card[number="7"] .symbols div:nth-child(6),
-.card[number="8"] .symbols div:nth-child(5),
-.card[number="8"] .symbols div:nth-child(6) {
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.card[number="7"] .symbols div:nth-child(7) {
-    top: 35px;
-}
-
-.card[number="8"] .symbols div:nth-child(7) {
-    top: 35px;
-}
-
-.card[number="8"] .symbols div:nth-child(8) {
-    bottom: 35px;
-    transform: translateX(-50%) rotate(0.5turn);
-}
-
-.card[number="9"] .symbols div:nth-child(5),
-.card[number="9"] .symbols div:nth-child(6),
-.card[number="10"] .symbols div:nth-child(5),
-.card[number="10"] .symbols div:nth-child(6) {
-    top: 41px;
-}
-
-.card[number="9"] .symbols div:nth-child(7),
-.card[number="9"] .symbols div:nth-child(8),
-.card[number="10"] .symbols div:nth-child(7),
-.card[number="10"] .symbols div:nth-child(8) {
-    bottom: 41px;
-}
-
-.card[number="10"] .symbols div:nth-child(9) {
-    top: 30px;
-}
-
-.card[number="10"] .symbols div:nth-child(10) {
-    bottom: 30px;
-}
-
-.card .symbols div.image {
-    width: 100px;
-    height: 130px;
-    background-image: url("./images/cards-front.png");
-    background-size: 350px;
-    background-repeat: no-repeat;
-    background-position-y: 5px;
-}
-
-.card[number="Q"] .symbols div.image {
-    background-position-y: -120px;
-}
-
-.card[number="K"] .symbols div.image {
-    background-position-y: -245px;
-}
-
-.card[symbol="♦"] .symbols div.image {
-    background-position-x: -82px;
-}
-
-.card[symbol="♥"] .symbols div.image {
-    background-position-x: -169px;
-}
-
-.card[symbol="♠"] .symbols div.image {
-    background-position-x: -254px;
-}
-
-.card[symbol="♣"] .symbols div.image {
-    background-position-x: 2px;
+.card {
+    &[number="A"] .symbols div {
+        &:nth-child(1) {
+            font-size: 65px;
+            top: 25px;
+        }
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &[number="2"] .symbols div,
+    &[number="3"] .symbols div,
+    &[number="5"] .symbols div:nth-child(5),
+    &[number="7"] .symbols div:nth-child(7) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(7),
+        &:nth-child(8) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    &[number="9"] .symbols div:nth-child(9) {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(9),
+        &:nth-child(10) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    &[number="2"] .symbols div:nth-child(1),
+    &[number="3"] .symbols div:nth-child(1) {
+        top: 20px;
+    }
+    &[number="2"] .symbols div:nth-child(2) {
+        bottom: 20px;
+        transform: translateX(-50%) rotate(0.5turn);
+    }
+    &[number="3"] .symbols div {
+        &:nth-child(3) {
+            bottom: 20px;
+            transform: translateX(-50%) rotate(0.5turn);
+        }
+        &:nth-child(2) {
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    }
+    &[number="5"] .symbols div:nth-child(5),
+    &[number="9"] .symbols div:nth-child(9) {
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    &[number="4"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="5"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="6"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="7"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(2) {
+            top: 20px;
+        }
+    }
+    &[number="4"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="5"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="6"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="7"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(3),
+        &:nth-child(4) {
+            bottom: 20px;
+            transform: rotate(0.5turn);
+        }
+    }
+    &[number="4"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3) {
+            left: 20px;
+        }
+    }
+    &[number="5"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3) {
+            left: 20px;
+        }
+    }
+    &[number="6"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5) {
+            left: 20px;
+        }
+    }
+    &[number="7"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5) {
+            left: 20px;
+        }
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5) {
+            left: 20px;
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5),
+        &:nth-child(7) {
+            left: 20px;
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(1),
+        &:nth-child(3),
+        &:nth-child(5),
+        &:nth-child(7) {
+            left: 20px;
+        }
+    }
+    &[number="4"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4) {
+            right: 20px;
+        }
+    }
+    &[number="5"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4) {
+            right: 20px;
+        }
+    }
+    &[number="6"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6) {
+            right: 20px;
+        }
+    }
+    &[number="7"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6) {
+            right: 20px;
+        }
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6) {
+            right: 20px;
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6),
+        &:nth-child(8) {
+            right: 20px;
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(2),
+        &:nth-child(4),
+        &:nth-child(6),
+        &:nth-child(8) {
+            right: 20px;
+        }
+    }
+    &[number="6"] .symbols div {
+        &:nth-child(5),
+        &:nth-child(6) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &[number="7"] .symbols div {
+        &:nth-child(5),
+        &:nth-child(6) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(5),
+        &:nth-child(6) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &[number="7"] .symbols div:nth-child(7) {
+        top: 35px;
+    }
+    &[number="8"] .symbols div {
+        &:nth-child(7) {
+            top: 35px;
+        }
+        &:nth-child(8) {
+            bottom: 35px;
+            transform: translateX(-50%) rotate(0.5turn);
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(5),
+        &:nth-child(6) {
+            top: 41px;
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(5),
+        &:nth-child(6) {
+            top: 41px;
+        }
+    }
+    &[number="9"] .symbols div {
+        &:nth-child(7),
+        &:nth-child(8) {
+            bottom: 41px;
+        }
+    }
+    &[number="10"] .symbols div {
+        &:nth-child(7),
+        &:nth-child(8) {
+            bottom: 41px;
+        }
+        &:nth-child(9) {
+            top: 30px;
+        }
+        &:nth-child(10) {
+            bottom: 30px;
+        }
+    }
+    .symbols div.image {
+        width: 100px;
+        height: 130px;
+        background-image: url("./images/cards-front.png");
+        background-size: 350px;
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+    }
+    &[number="Q"] .symbols div.image {
+        background-position-y: -120px;
+    }
+    &[number="K"] .symbols div.image {
+        background-position-y: -245px;
+    }
+    &[symbol="♦"] .symbols div.image {
+        background-position-x: -82px;
+    }
+    &[symbol="♥"] .symbols div.image {
+        background-position-x: -169px;
+    }
+    &[symbol="♠"] .symbols div.image {
+        background-position-x: -254px;
+    }
+    &[symbol="♣"] .symbols div.image {
+        background-position-x: 2px;
+    }
 }
